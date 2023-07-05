@@ -30,18 +30,20 @@ func DBTransactionMiddleware(db *gorm.DB) fiber.Handler {
 			}
 		}()
 
-		// Needs Fix
-		c.Set("db_trx", txHandle)
+		c.Locals("db_trx", txHandle)
 		c.Next()
 
 		if StatusInList(c.Response().StatusCode(), []int{http.StatusOK, http.StatusCreated}) {
 			log.Print("committing transactions")
 			if err := txHandle.Commit().Error; err != nil {
-				log.Print("trx commit error: ", err)
+				log.Print("trxxx commit error: ", err)
+				return err
 			}
 		} else {
 			log.Print("rolling back transaction due to status code: ", c.Response().StatusCode())
 			txHandle.Rollback()
 		}
+
+		return nil
 	}
 }
