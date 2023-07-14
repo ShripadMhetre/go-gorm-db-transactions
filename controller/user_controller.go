@@ -56,7 +56,7 @@ func (u userController) AddUser(c *fiber.Ctx) error {
 }
 
 func (u userController) TransferMoney(c *fiber.Ctx) error {
-	log.Print("[UserController]...get all Users")
+	log.Print("[UserController]...TransferMoney")
 
 	txHandle := c.Locals("db_trx").(*gorm.DB)
 
@@ -74,10 +74,6 @@ func (u userController) TransferMoney(c *fiber.Ctx) error {
 		txHandle.Rollback()
 		return c.Status(http.StatusBadRequest).JSON(fiber.Map{"error": "Error while decrementing money"})
 	}
-
-	// if err := txHandle.Commit().Error; err != nil {
-	// 	log.Print("trx commit error: ", err)
-	// }
 
 	return c.Status(http.StatusOK).JSON(fiber.Map{"msg": "Successfully Money Transferred"})
 }

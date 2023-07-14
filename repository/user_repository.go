@@ -38,14 +38,12 @@ func (u userRepository) Save(user model.User) (model.User, error) {
 	log.Print("[UserRepository]...Save")
 	err := u.DB.Create(&user).Error
 	return user, err
-
 }
 
 func (u userRepository) GetAll() (users []model.User, err error) {
 	log.Print("[UserRepository]...Get All")
 	err = u.DB.Find(&users).Error
 	return users, err
-
 }
 
 func (u userRepository) WithTrx(trxHandle *gorm.DB) userRepository {

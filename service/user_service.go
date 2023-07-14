@@ -33,21 +33,17 @@ func (u userService) WithTrx(trxHandle *gorm.DB) userService {
 }
 
 func (u userService) Save(user model.User) (model.User, error) {
-
 	return u.userRepository.Save(user)
 }
 
 func (u userService) GetAll() ([]model.User, error) {
-
 	return u.userRepository.GetAll()
 }
 
 func (u userService) IncrementMoney(receiver uint, amount float64) error {
-
 	return u.userRepository.IncrementMoney(receiver, amount)
 }
 
 func (u userService) DecrementMoney(giver uint, amount float64) error {
-
 	return u.userRepository.DecrementMoney(giver, amount)
 }

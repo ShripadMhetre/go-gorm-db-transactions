@@ -23,7 +23,7 @@ func DBConnection() (*gorm.DB, error) {
 		logger.Config{
 			SlowThreshold: time.Second, // Slow SQL threshold
 			LogLevel:      logger.Info, // Log level
-			Colorful:      true,        // Disable color
+			Colorful:      true,
 		},
 	)
 
